@@ -1,1 +1,16 @@
 <p>region works!</p>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>      
+      </tr>
+    </thead>
+    <tbody>      
+      <tr *ngFor="let regio of regions2">
+        <td>{{regio.id}}</td>
+        <td>{{regio.name}}</td>
+      </tr>      
+    </tbody>
+  </table>

@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RegionComponent } from './module/region/region.component';
 
 const routes: Routes = [
-  { path: 'regions', component: RegionComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'regions' }
+  { path: '', pathMatch: 'full', redirectTo: 'regions' },
+  {
+    path: 'regions',
+    loadChildren: () => import('./module/region/region.module').then(m => m.RegionModule)
+  }
 ];
 
 @NgModule({
