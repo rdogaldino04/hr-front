@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Region } from 'src/app/model/region';
+import { RegionService } from 'src/app/service/region.service';
 
 @Component({
   selector: 'app-region',
@@ -7,16 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegionComponent implements OnInit {
 
-  regions2 = [
-    {id: 1, name: 'Europe'},
-    {id: 2, name: 'Americas'},
-    {id: 3, name: 'Asia'},
-    {id: 4, name: 'Middle East and Africa'}
-  ];
+  public regions: Array<Region> = [];
 
-  constructor() { }
+  constructor(private regionService: RegionService) { }
 
   ngOnInit(): void {
+    this.regionService.listByFilter().subscribe(regions => this.regions = regions);
   }
 
 }
