@@ -1,1 +1,18 @@
-<p>location works!</p>
+<table class="table table-bordered">
+    <thead>
+      <tr>        
+        <th scope="col">Street Address</th>
+        <th scope="col">Postal Code</th>
+        <th scope="col">City</th>
+        <th scope="col">State Province</th>
+      </tr>
+    </thead>
+    <tbody>      
+      <tr *ngFor="let location of locations">
+        <td>{{location.streetAddress}}</td>
+        <td>{{location.postalCode}}</td>
+        <td>{{location.city}}</td>
+        <td>{{location.stateProvince}}</td>
+      </tr>      
+    </tbody>
+  </table>
