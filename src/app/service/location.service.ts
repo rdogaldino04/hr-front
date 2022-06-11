@@ -15,7 +15,10 @@ export class LocationService {
 
   public findByFilter(filter: LocationFilter): Observable<Location[]> {
     const params = new HttpParams()
-      .append('city', filter.city);
+      .append('streetAddress', filter.streetAddress)
+      .append('postalCode', filter.postalCode)
+      .append('city', filter.city)
+      .append('stateProvince', filter.stateProvince);
     return this.httpClient.get<Location[]>(`${environment.BASE_API}/locations`, {params})
     .pipe(
       first(),
