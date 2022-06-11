@@ -52,4 +52,8 @@ export class LocationComponent implements OnInit {
     };
   }
 
+  public clean(): void {
+    this.formLocationFilter.reset();
+  }
+
 }
