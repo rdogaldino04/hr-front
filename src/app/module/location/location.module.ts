@@ -4,6 +4,7 @@ import { LocationComponent } from './location.component';
 import { LocationRoutingModule } from './location-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocationListModule } from './location-list/location-list.module';
+import { LocationFormModule } from './location-form/location-form.module';
 
 
 
@@ -14,7 +15,8 @@ import { LocationListModule } from './location-list/location-list.module';
     FormsModule,
     ReactiveFormsModule,
     LocationRoutingModule,
-    LocationListModule
+    LocationListModule,
+    LocationFormModule
   ]
 })
 export class LocationModule { }
