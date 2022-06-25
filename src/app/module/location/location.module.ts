@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LocationComponent } from './location.component';
 import { LocationRoutingModule } from './location-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LocationListModule } from './location-list/location-list.module';
 
 
 
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    LocationRoutingModule
+    LocationRoutingModule,
+    LocationListModule
   ]
 })
 export class LocationModule { }
