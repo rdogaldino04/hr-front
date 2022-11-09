@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'hr-font';
+
+  constructor() {
+    console.log('AppComponent')
+  }
 }
