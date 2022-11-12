@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'home',
+    redirectTo: 'home'
   },
   {
     path: 'home',
@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'user/:userName',
     pathMatch: 'full',
-    component: HomeComponent
+    component: HomeComponent,
+    data: {
+      title: 'Home',
+    },
+  },
   }
 ];
 
