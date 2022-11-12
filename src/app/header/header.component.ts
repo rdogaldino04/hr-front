@@ -1,11 +1,27 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserService } from '../core/user/user.service';
+import { User } from '../core/user/user';
 
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-    constructor() {
-        console.log('HeaderComponent')
+
+    user$: Observable<User>;
+
+    constructor(
+        private userService: UserService, 
+        private router:Router
+    ) {
+        this.user$ = this.userService.getUser();
     }
+
+    logout() {
+        this.userService.logout();
+        this.router.navigate(['']);
+    }
+
 }

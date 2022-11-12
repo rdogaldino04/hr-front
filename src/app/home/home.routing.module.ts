@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Route, RouterModule } from "@angular/router";
 import { HomeComponent } from './home.component';
 import { SignInComponent } from './signin/signin.component';
+import { SignUpComponent } from './singup/signup.component';
 
 const routes: Route[] = [
     {
@@ -10,8 +11,18 @@ const routes: Route[] = [
         children: [
             {
                 path: '',
-                component: SignInComponent
-            }
+                component: SignInComponent,
+                data: {
+                    title: 'Sign in'
+                }
+            }, 
+            { 
+                path: 'signup',
+                component: SignUpComponent,
+                data: {
+                    title: 'Sign up'
+                }
+            },
         ]
     }
 
