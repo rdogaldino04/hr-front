@@ -5,13 +5,11 @@ import { Component } from "@angular/core";
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.css']
 })
-export class MenuComponent { 
+export class MenuComponent {
 
     isShown = false;
 
-    constructor() {
-        console.log('MenuComponent')
-    }
+    constructor() { }
 
     toggle() {
         this.isShown = !this.isShown;
