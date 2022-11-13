@@ -13,21 +13,21 @@
             </ul>
         </app-menu>
 
-        <div *ngIf="(user$ | async) as user; else login">
+        <div *ngIf="user$ | async as user; else login">
             <i class="fa fa-user-circle mr-1"></i>
-            <a class="mr-1">{{ user.name }}</a>
+            <a class="mr-1">{{user.name}}</a>
             <a (click)="logout()">(Logout)</a>
         </div>
 
         <ng-template #login>
             <span class="navbar-text">
-                <a [routerLink]="['']">Please, login!</a>
+                <a [routerLink]="['login']">Please, login!</a>
             </span>
         </ng-template>
     </nav>
 
     <div class="fixed-top">
-        <!-- <ap-loading></ap-loading>  -->       
+        <app-loading></app-loading>
     </div>
     
 </header>

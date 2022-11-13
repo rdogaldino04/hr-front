@@ -11,9 +11,7 @@ export class UserService {
     private userSubject = new BehaviorSubject<User>(null);
     private userName: string;
     
-    constructor(private tokenService: TokenService) { 
-        
-    }
+    constructor(private tokenService: TokenService) { }
 
     setToken(token: string) {
         this.tokenService.setToken(token);
@@ -24,12 +22,23 @@ export class UserService {
         return this.userSubject.asObservable();
     }
 
+    setUser(user: User) {
+        return this.userSubject.next(user)
+    }
+
     private decodeAndNotify() {
+        const user = this.decode();        
+        this.userName = user.name;
+        console.log(this.userName)
+        this.userSubject.next(user);
+        console.log('this.userSubject.next(user);')
+    }
+
+    public decode(): User {
         const token = this.tokenService.getToken();
         const payload = jtw_decode.default(token) as jtw_decode.JwtPayload;
-        const user = { id: null, name: payload.sub, email: payload.sub }
-        this.userName = user.name;
-        this.userSubject.next(user);
+        const user = { id: null, name: payload.sub, email: payload.sub };
+        return user;
     }
 
     logout() {
