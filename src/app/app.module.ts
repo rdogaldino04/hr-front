@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorsModule } from './core/errors/errors.module';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ErrorsModule } from './core/errors/errors.module';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
-    ErrorsModule
+    ErrorsModule, 
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
