@@ -6,6 +6,7 @@ import { MenuModule } from '../shared/components/menu/menu.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RequestInterceptor } from "./user/request.interceptor";
+import { ShowIfLoggedModule } from "../shared/directives/show-if-logged/show-if-logged.module";
 
 @NgModule({
     declarations: [
@@ -20,7 +21,8 @@ import { RequestInterceptor } from "./user/request.interceptor";
         CommonModule,
         RouterModule,
         MenuModule,
-        LoadingModule
+        LoadingModule,
+        ShowIfLoggedModule
     ],
     providers: [
         {
