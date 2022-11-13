@@ -3,12 +3,13 @@ import { Route, RouterModule } from "@angular/router";
 import { HomeComponent } from './home.component';
 import { SignInComponent } from './signin/signin.component';
 import { SignUpComponent } from './singup/signup.component';
+import { LoginGuard } from '../core/user/login.guard';
 
 const routes: Route[] = [
     {
         path: '',
         component: HomeComponent,
-        children: [
+        canActivate: [LoginGuard],
             {
                 path: '',
                 component: SignInComponent,
