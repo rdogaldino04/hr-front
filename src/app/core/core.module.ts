@@ -7,15 +7,16 @@ import { LoadingModule } from '../shared/components/loading/loading.module';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RequestInterceptor } from "./user/request.interceptor";
 import { ShowIfLoggedModule } from "../shared/directives/show-if-logged/show-if-logged.module";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
     declarations: [
-        HeaderComponent
-        //FooterComponent
+        HeaderComponent,
+        FooterComponent
     ],
     exports: [
-        HeaderComponent
-        //FooterComponent
+        HeaderComponent,
+        FooterComponent
     ],
     imports: [
         CommonModule,
