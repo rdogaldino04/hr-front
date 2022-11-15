@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './user';
 import { TokenService } from '../token/token.service';
 import * as jtw_decode from 'jwt-decode';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
     private userSubject = new BehaviorSubject<User>(null);
-    private userName: string;
+    private username: string;
 
-    constructor(private tokenService: TokenService) { }
+    constructor(
+        private tokenService: TokenService,
+        private http: HttpClient
+    ) { }
 
     setToken(token: string) {
         this.tokenService.setToken(token);
@@ -28,8 +33,7 @@ export class UserService {
 
     private decodeAndNotify() {
         const user = this.decode();
-        this.userName = user.name;
-        console.log(this.userName)
+        this.username = user.username;
         this.userSubject.next(user);
     }
 
@@ -52,7 +56,14 @@ export class UserService {
     }
 
     getUserName() {
-        return this.userName;
+        return this.username;
+    }
+
+    save(user: User): Observable<User> {
+        return this.http.post<User>(
+            `http://localhost:8080/api/users`,
+            user
+        ).pipe(tap(resp => console.log(resp)));
     }
 
 }

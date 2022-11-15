@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './users/user/user.component';
 
 const routes: Routes = [
   {
@@ -21,12 +22,12 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
-  {
-    path: 'user/:userName',
-    pathMatch: 'full',
-    component: HomeComponent,
+  {    
+    path: 'users',    
+    component: UserComponent,
+    canActivate: [LoginGuard],
     data: {
-      title: 'Home',
+      title: 'Users',
     },
   },
   { 

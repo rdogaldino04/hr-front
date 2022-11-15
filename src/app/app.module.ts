@@ -7,6 +7,7 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorsModule } from './core/errors/errors.module';
 import { LoginModule } from './login/login.module';
+import { RegistrationsModule } from './registrations/registrations.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginModule } from './login/login.module';
     CoreModule,
     HttpClientModule,
     ErrorsModule, 
-    LoginModule
+    LoginModule,
+    RegistrationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
