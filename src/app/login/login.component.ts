@@ -29,21 +29,18 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const userName = this.loginForm.get('userName').value;
+    const username = this.loginForm.get('userName').value;
     const password = this.loginForm.get('password').value;
     this.authService
-      .authenticate(userName, password)
+      .authenticate(username, password)
       .subscribe(
-        () => //this.fromUrl
-          //? this.router.navigateByUrl(this.fromUrl)
-          //: this.router.navigate(['user', userName]),
-          this.router.navigate(['home']),
+        () => this.router.navigate(['home']),
         err => {
           console.log(err);
           this.loginForm.reset();
           //this.platformDetectorService.isPlatformBrowser &&
             //this.userNameInput.nativeElement.focus();
-          alert('Invalid user name or password');
+            console.log('Invalid user name or password');
         }
       );
   }

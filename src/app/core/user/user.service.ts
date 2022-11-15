@@ -38,7 +38,7 @@ export class UserService {
             return null;
         const token = this.tokenService.getToken();
         const payload = jtw_decode.default(token) as jtw_decode.JwtPayload;
-        const user = { id: null, name: payload.sub, email: payload.sub };
+        const user = { id: null, name: null, username: payload.sub, roles: payload['roles'] };
         return user;
     }
 
