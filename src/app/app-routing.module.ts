@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './users/user/user.component';
+import { UserComponent } from './registrations/users/user/user.component';
 import { LoginGuard } from './core/user/login.guard';
 
 const routes: Routes = [
