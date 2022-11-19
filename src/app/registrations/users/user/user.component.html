@@ -1,7 +1,7 @@
 <h4 class="text-center">Users</h4>
 
 <div class="container">
-  <form class="form mt-4" [formGroup]="userForm" (submit)="save()">
+  <form class="form mt-4" [formGroup]="userForm" (submit)="saveOrEdit()">
     <div class="form-group">
       <input       
         formControlName="name" 
@@ -26,7 +26,7 @@
       </app-vmessage>      
     </div>
 
-    <div class="form-group">
+    <div class="form-group" *ngIf="!userForm.get('id').value">
       <input 
       formControlName="password" 
       type="password" 
@@ -47,5 +47,5 @@
   </button>
 
   </form>
-
+{{userForm.get('id').value}}
 </div>

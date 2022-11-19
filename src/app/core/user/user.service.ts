@@ -7,6 +7,7 @@ import * as jtw_decode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment.prod';
+import { UserInput } from './user-input';
 
 const API_URL = environment.BASE_API;
 
@@ -75,6 +76,19 @@ export class UserService {
           )
           .pipe(map(res => res['_embedded']['users']));
           
+    }
+
+    getById(id: number): Observable<User> {
+        return this.http.get<User>(
+            `${API_URL}/users/${id}`
+        );
+    }
+
+    update(id: number, user: UserInput): Observable<User> {
+        return this.http.put<User>(
+            `${API_URL}/users/${id}`,
+            user
+        ).pipe(tap(resp => console.log(resp)));
     }
 
 }

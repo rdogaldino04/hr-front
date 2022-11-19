@@ -5,7 +5,7 @@ import { UserListComponent } from './users/user-list/user-list.component';
 const routes: Routes = [
   {
     path: 'users',
-    component: UserListComponent
+    loadChildren: () => import('../registrations/users/user.module').then(m => m.UserModule),
   },
 ];
 

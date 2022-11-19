@@ -1,15 +1,22 @@
 <div class="container-fluid">
+
+  <div style="margin-bottom: 16px;">
+    <button type="button" class="btn btn-primary" (click)="goNewUser()">New</button>
+  </div>  
+
   <table class="table table-striped table-hover table-bordered">
     <thead>
       <tr>        
         <th scope="col">Name</th>
         <th scope="col">Username</th>
+        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users$ | async">        
         <td>{{user.name}}</td>
         <td>{{user.username}}</td>
+        <td><button type="button" class="btn btn-primary" (click)="goUpdateUser(user.id)">Edit</button></td>
       </tr>      
     </tbody>
   </table>

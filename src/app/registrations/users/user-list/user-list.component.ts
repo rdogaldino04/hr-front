@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/core/user/user';
 import { UserService } from '../../../core/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -10,12 +11,23 @@ import { UserService } from '../../../core/user/user.service';
 })
 export class UserListComponent implements OnInit {
 
-  users$: Observable<User[]>;
+  users$: Observable<User[]> = this.userService.getUsers();
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.users$ = this.userService.getUsers();
+    
+  }
+
+  goNewUser(): void {
+    this.router.navigate(['registrations', 'users', 'new']);
+  }
+
+  goUpdateUser(userId: Number): void {
+    this.router.navigate(['registrations', 'users', 'edit', userId]);
   }
 
 }
