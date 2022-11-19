@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RequestInterceptor } from "./user/request.interceptor";
 import { ShowIfLoggedModule } from "../shared/directives/show-if-logged/show-if-logged.module";
 import { FooterComponent } from './footer/footer.component';
+import { AuthInterceptor } from "./auth/auth.interceptor";
 
 @NgModule({
     declarations: [
@@ -29,6 +30,11 @@ import { FooterComponent } from './footer/footer.component';
         {
             provide: HTTP_INTERCEPTORS,
             useClass: RequestInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
             multi: true
         }
     ]    
