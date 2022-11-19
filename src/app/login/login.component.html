@@ -4,12 +4,12 @@
     <form [formGroup]="loginForm" class="form mt-4" (submit)="login()">
         <div class="form-group">
             <input #userNameInput
-                formControlName="userName" 
+                formControlName="username" 
                 class="form-control" 
                 placeholder="user name" 
                 autofocus>
                 <app-vmessage 
-                    *ngIf="loginForm.get('userName').errors?.required"
+                    *ngIf="loginForm.get('username').errors?.required"
                     text="User name is required!">
                 </app-vmessage>                 
         </div>
