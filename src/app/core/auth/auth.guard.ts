@@ -11,16 +11,10 @@ export class AuthGuard implements CanActivate {
         private router: Router
     ) {}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        console.log('AuthGuard canActivate')
-        if (!this.userService.isLogged()) {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {        
+        if (!this.userService.isLogged()) {            
             this.router.navigate(
-                [''],
-                {
-                    queryParams: {
-                        formUrl: state.url
-                    }
-                }
+                ['']                
             );
             return false;
         }

@@ -26,7 +26,7 @@ export class LoadingInterceptor implements HttpInterceptor {
 
         return next
             .handle(req)
-            .pipe(tap(event => {
+            .pipe(tap(event => {                
                 if (event instanceof HttpResponse) {
                     this.loadingService.stop();
                 } else {
