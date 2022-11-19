@@ -5,7 +5,8 @@ import { User } from './user';
 import { TokenService } from '../token/token.service';
 import * as jtw_decode from 'jwt-decode';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -64,6 +65,14 @@ export class UserService {
             `http://localhost:8080/api/users`,
             user
         ).pipe(tap(resp => console.log(resp)));
+    }
+
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(
+            `${environment.BASE_API}/users`
+          )
+          .pipe(map(res => res['_embedded']['users']));
+          
     }
 
 }
