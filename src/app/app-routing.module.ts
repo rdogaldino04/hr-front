@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './registrations/users/user/user.component';
-import { LoginGuard } from './core/user/login.guard';
 
 const routes: Routes = [
   {
@@ -22,13 +20,9 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
   },
-  {    
-    path: 'users',    
-    component: UserComponent,
-    canActivate: [LoginGuard],
-    data: {
-      title: 'Users',
-    },
+  {
+    path: 'registrations',
+    loadChildren: () => import('./registrations/registrations.module').then(m => m.RegistrationsModule)
   },
   { 
     path: 'not-found', 
