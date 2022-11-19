@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment.prod';
 
+const API_URL = environment.BASE_API;
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
@@ -62,14 +64,14 @@ export class UserService {
 
     save(user: User): Observable<User> {
         return this.http.post<User>(
-            `http://localhost:8080/api/users`,
+            `${API_URL}/users`,
             user
         ).pipe(tap(resp => console.log(resp)));
     }
 
     getUsers(): Observable<User[]> {
         return this.http.get<User[]>(
-            `${environment.BASE_API}/users`
+            `${API_URL}/users`
           )
           .pipe(map(res => res['_embedded']['users']));
           

@@ -3,8 +3,9 @@ import { Injectable } from "@angular/core";
 import { tap } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
+import { environment } from '../../../environments/environment.prod';
 
-const API_URL = 'http://localhost:8080/api';
+const API_URL = environment.BASE_API;
 
 @Injectable({
     providedIn: 'root'
