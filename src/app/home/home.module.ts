@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
 
 @NgModule({
-    declarations: [         
+    declarations: [
         HomeComponent
     ],
     imports: [
@@ -17,6 +17,6 @@ import { VMessageModule } from '../shared/components/vmessage/vmessage.module';
         ReactiveFormsModule,
         VMessageModule
     ]
-    
+
 })
 export class HomeModule { }

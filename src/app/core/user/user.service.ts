@@ -22,44 +22,45 @@ export class UserService {
         private http: HttpClient
     ) { }
 
-    setToken(token: string) {
+    setToken(token: string): void {
         this.tokenService.setToken(token);
         this.decodeAndNotify();
     }
 
-    getUser() {
+    getUser(): Observable<User> {
         return this.userSubject.asObservable();
     }
 
-    setUser(user: User) {
-        return this.userSubject.next(user)
+    setUser(user: User): void {
+        return this.userSubject.next(user);
     }
 
-    private decodeAndNotify() {
+    private decodeAndNotify(): void {
         const user = this.decode();
         this.username = user.username;
         this.userSubject.next(user);
     }
 
     public decode(): User {
-        if (!this.tokenService.hasToken())
+        if (!this.tokenService.hasToken()) {
             return null;
+        }
         const token = this.tokenService.getToken();
         const payload = jtw_decode.default(token) as jtw_decode.JwtPayload;
         const user = { id: null, name: null, username: payload.sub, roles: payload['roles'] };
         return user;
     }
 
-    logout() {
+    logout(): void {
         this.tokenService.removeToken();
         this.userSubject.next(null);
     }
 
-    isLogged() {
+    isLogged(): boolean {
         return this.tokenService.hasToken();
     }
 
-    getUserName() {
+    getUserName(): string {
         return this.username;
     }
 
@@ -73,9 +74,8 @@ export class UserService {
     getUsers(): Observable<User[]> {
         return this.http.get<User[]>(
             `${API_URL}/users`
-          )
-          .pipe(map(res => res['_embedded']['users']));
-          
+        )
+            .pipe(map(res => res['_embedded']['users']));
     }
 
     getById(id: number): Observable<User> {

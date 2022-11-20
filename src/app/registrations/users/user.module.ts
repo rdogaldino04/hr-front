@@ -16,7 +16,7 @@ import { UserResolver } from './user.resolver';
     UserRoutesModule
   ],
   declarations: [
-    UserComponent, 
+    UserComponent,
     UserListComponent
   ],
   providers: [

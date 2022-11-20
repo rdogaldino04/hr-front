@@ -26,11 +26,11 @@ const routes: Routes = [
     loadChildren: () => import('./registrations/registrations.module').then(m => m.RegistrationsModule),
     canActivate: [AuthGuard]
   },
-  { 
-    path: 'not-found', 
+  {
+    path: 'not-found',
     component: NotFoundComponent,
     data: {
-        title: 'Not found'
+      title: 'Not found'
     }
   },
   {

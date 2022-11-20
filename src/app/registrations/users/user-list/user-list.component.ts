@@ -18,15 +18,15 @@ export class UserListComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-    
+  ngOnInit(): void {
+
   }
 
   goNewUser(): void {
     this.router.navigate(['registrations', 'users', 'new']);
   }
 
-  goUpdateUser(userId: Number): void {
+  goUpdateUser(userId: number): void {
     this.router.navigate(['registrations', 'users', 'edit', userId]);
   }
 

@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-menu',
@@ -11,7 +11,7 @@ export class MenuComponent {
 
     constructor() { }
 
-    toggle() {
+    toggle(): void {
         this.isShown = !this.isShown;
     }
 }

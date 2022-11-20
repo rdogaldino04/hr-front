@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { tap } from "rxjs/operators";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { UserService } from '../user/user.service';
 import { environment } from '../../../environments/environment.prod';
@@ -9,9 +9,9 @@ const API_URL = environment.BASE_API;
 
 @Injectable({
     providedIn: 'root'
-  })
-  export class AuthService {
-    
+})
+export class AuthService {
+
     constructor(
         private http: HttpClient,
         private userService: UserService
@@ -33,9 +33,9 @@ const API_URL = environment.BASE_API;
                 options
             ).pipe(tap(res => {
                 const authToken = res.acess_token;
-                this.userService.setToken(authToken)
+                this.userService.setToken(authToken);
                 console.log(`User ${username} authenticated with token ${authToken}`);
             }));
     }
 
-  }
+}

@@ -1,5 +1,5 @@
 import { ElementRef, Directive, OnInit, Renderer2 } from '@angular/core';
-import { UserService } from "../../../core/user/user.service";
+import { UserService } from '../../../core/user/user.service';
 
 @Directive({
     selector: '[showIfLogged]'

@@ -10,7 +10,7 @@ import { User } from '../user/user';
 })
 export class HeaderComponent implements OnInit {
 
-    user$: Observable<User>;    
+    user$: Observable<User>;
     username = '';
 
     constructor(
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
         this.userService.setUser(this.userService.decode() ? this.userService.decode() : null);
     }
 
-    logout() {
+    logout(): void {
         this.userService.logout();
         this.router.navigate(['']);
     }

@@ -12,7 +12,7 @@ import { UserInput } from '../../../core/user/user-input';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit, OnDestroy {
-  
+
   userForm: FormGroup;
   subscription: Subscription;
 
@@ -23,7 +23,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.userForm = this.formBuilder.group({
       id: [null],
       name: ['', Validators.required],
@@ -32,15 +32,14 @@ export class UserComponent implements OnInit, OnDestroy {
     });
 
     this.subscription = this.activatedRoute.data
-      .subscribe((info: {user: User}) => {
-        console.log(info.user)
+      .subscribe((info: { user: User }) => {
         if (info.user) {
           this.userForm.get('id').setValue(info.user.id);
           this.userForm.get('name').setValue(info.user.name);
           this.userForm.get('username').setValue(info.user.username);
           this.userForm.get('password').clearValidators();
         }
-      });      
+      });
   }
 
   ngOnDestroy(): void {
@@ -49,14 +48,14 @@ export class UserComponent implements OnInit, OnDestroy {
 
   save(): void {
     const user = this.userForm.getRawValue() as User;
-    this.userService.save(user).subscribe(user => {
+    this.userService.save(user).subscribe(() => {
       this.router.navigate(['registrations', 'users']);
     },
       err => console.log(err)
-    )
+    );
   }
 
-  saveOrEdit() : void {
+  saveOrEdit(): void {
     if (this.userForm.get('id').value) {
       this.edit();
     } else {
@@ -66,11 +65,11 @@ export class UserComponent implements OnInit, OnDestroy {
 
   edit(): void {
     const user = { name: this.userForm.get('name').value, username: this.userForm.get('username').value } as UserInput;
-    this.userService.update(this.userForm.get('id').value, user).subscribe(user => {
+    this.userService.update(this.userForm.get('id').value, user).subscribe(() => {
       this.router.navigate(['registrations', 'users']);
     },
       err => console.log(err)
-    )
+    );
   }
 
 }

@@ -1,4 +1,4 @@
-export interface UserInput {    
+export interface UserInput {
     name: string;
     username: string;
 }

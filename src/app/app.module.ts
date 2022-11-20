@@ -18,7 +18,7 @@ import { RegistrationsModule } from './registrations/registrations.module';
     AppRoutingModule,
     CoreModule,
     HttpClientModule,
-    ErrorsModule, 
+    ErrorsModule,
     LoginModule,
     RegistrationsModule
   ],
