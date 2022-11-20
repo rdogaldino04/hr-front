@@ -4,10 +4,12 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from './user';
 import { TokenService } from '../token/token.service';
 import * as jtw_decode from 'jwt-decode';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { tap, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment.prod';
 import { UserInput } from './user-input';
+import { Pagination } from 'src/app/model/pagination';
+import { UserFilter } from '../../model/filter/user-filter';
 
 const API_URL = environment.BASE_API;
 
@@ -89,6 +91,16 @@ export class UserService {
             `${API_URL}/users/${id}`,
             user
         ).pipe(tap(resp => console.log(resp)));
+    }
+
+    getUsersPagination(filter?: UserFilter): Observable<Pagination> {
+        let params = new HttpParams()
+            .set('isPagination', 'true')
+            .set('page', filter.page ? String(filter.page) : '');
+        return this.http.get<Pagination>(
+            `${API_URL}/users`,
+            { params },
+        );
     }
 
 }

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="(pagination$ | async) || paginationDefault; let pagination">
 
   <div style="margin-bottom: 16px;">
     <button type="button" class="btn btn-primary" (click)="goNewUser()">New</button>
@@ -13,12 +13,32 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users$ | async">        
+      <tr *ngFor="let user of pagination._embedded.users">        
         <td>{{user.name}}</td>
         <td>{{user.username}}</td>
         <td><button type="button" class="btn btn-primary" (click)="goUpdateUser(user.id)">Edit</button></td>
       </tr>      
     </tbody>
   </table>
-  
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      
+      <li class="page-item" [ngClass]="{'disabled': (pagination.page.number === 0)}">
+        <a class="page-link" (click)="goPage(pagination.page.number - 1)"
+          [ngClass]="{'inactiveLink': (pagination.page.number  === 0)}">Previous</a>
+      </li>
+      
+      <li class="page-item" [ngClass]="{'active': (i - 1) === pagination.page.number}" *ngFor="let i of getPageNumbers()">
+        <a class="page-link" (click)="goPage(i - 1)">{{i}}</a>
+      </li>
+      
+      <li class="page-item" aria-current="page"
+        [ngClass]="{'disabled': (pagination.page.number === (pagination.page.totalPages - 1))}">
+        <a class="page-link" (click)="goPage(pagination.page.number + 1)"
+          [ngClass]="{'inactiveLink': (pagination.page.number === (pagination.page.totalPages - 1))}">Next</a>
+      </li>
+    
+    </ul>
+  </nav>
 </div>
