@@ -1,8 +1,20 @@
 <div class="container-fluid" *ngIf="(pagination$ | async) || paginationDefault; let pagination">
 
-  <div style="margin-bottom: 16px;">
-    <button type="button" class="btn btn-primary" (click)="goNewUser()">New</button>
-  </div>  
+  <form [formGroup]="userForm" (submit)="search()">
+    <div class="row">
+      <div class="form-group  col-sm-4">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name"  />
+      </div>
+      <div class="form-group  col-sm-3">
+        <label for="username">Usename</label>
+        <input type="text" class="form-control" id="username" formControlName="username"  />
+      </div>
+    </div>
+
+    <button class="btn btn-primary mt-3" type="submit" style="margin-bottom: 16px;">Search</button>
+    <button class="btn btn-primary mt-3" type="button" (click)="goNewUser()" style="margin-bottom: 16px; margin-left: 8px;">New</button>
+  </form>
 
   <table class="table table-striped table-hover table-bordered">
     <thead>

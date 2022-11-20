@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from 'src/app/core/user/user';
 import { UserService } from '../../../core/user/user.service';
 import { Router } from '@angular/router';
 import { Pagination } from 'src/app/model/pagination';
 import { UserFilter } from '../../../model/filter/user-filter';
 import { tap } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-list',
@@ -13,8 +13,6 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
-
-  users$: Observable<User[]> = this.userService.getUsers();
   pagination$: Observable<Pagination>;
   paginationDefault = {
     _embedded: { users: [] },
@@ -26,19 +24,22 @@ export class UserListComponent implements OnInit {
     }
   } as Pagination;
   totalPages = 0;
+  userForm: FormGroup;
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    const userFilter = { name: null, username: null } as UserFilter
-    this.pagination$ = this.userService
-      .getUsersPagination(userFilter)
-      .pipe(tap((p: Pagination) => {
-        this.totalPages = p.page.totalPages;
-      }));
+    const uf = JSON.parse(window.localStorage.getItem('userFilter')) || { name: '', username: '', page: 0 } as UserFilter;
+    window.localStorage.setItem('userFilter', JSON.stringify(uf));
+    this.getUsersPagination(uf);
+    this.userForm = this.formBuilder.group({
+      name: [uf.name],
+      username: ['']
+    });
   }
 
   goNewUser(): void {
@@ -50,14 +51,33 @@ export class UserListComponent implements OnInit {
   }
 
   goPage(page: number): void {
-    const userFilter = { name: null, username: null, page } as UserFilter
-    this.pagination$ = this.userService.getUsersPagination(userFilter);
+    const userFilter = {
+      name: this.userForm.get('name').value,
+      username: this.userForm.get('username').value,
+      page
+    } as UserFilter;
+    this.getUsersPagination(userFilter);
   }
 
   getPageNumbers(): number[] {
-    const number = this.totalPages;
-    const arr = Array.from({ length: number }, (_, index) => index + 1);
+    const pageNumber = this.totalPages;
+    const arr = Array.from({ length: pageNumber }, (_, index) => index + 1);
     return arr;
   }
 
+  search(): void {
+    const userFilter = this.userForm.getRawValue() as UserFilter;
+    window.localStorage.setItem('userFilter', JSON.stringify(userFilter));
+    this.getUsersPagination(userFilter);
+  }
+
+  private getUsersPagination(userFilter?: UserFilter): void {
+    this.pagination$ = this.userService
+      .getUsersPagination(userFilter).pipe(tap((pagination: Pagination) => {
+        if (!pagination._embedded) {
+          pagination._embedded = { users: [] };
+        }
+        this.totalPages = pagination.page.totalPages;
+      }));
+  }
 }

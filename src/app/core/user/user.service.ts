@@ -94,9 +94,11 @@ export class UserService {
     }
 
     getUsersPagination(filter?: UserFilter): Observable<Pagination> {
-        let params = new HttpParams()
+        const params = new HttpParams()
             .set('isPagination', 'true')
-            .set('page', filter.page ? String(filter.page) : '');
+            .set('page', filter.page ? String(filter.page) : '')
+            .set('name', filter.name ? filter.name : '')
+            .set('username', filter.username ? filter.username : '');
         return this.http.get<Pagination>(
             `${API_URL}/users`,
             { params },
